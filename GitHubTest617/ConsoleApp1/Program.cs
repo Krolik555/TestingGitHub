@@ -12,32 +12,20 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            MyClass mc = new MyClass();
+            int x = 5;
+            int y = ++x;
+            int z = x++;
+            x += y;
+            Console.Write(x);
 
-            mc.Task(Call);
+            Console.Write(" ");
+            int i = 1;
+            int f = 1;
+            Console.Write(i++);
+            Console.Write(++f);
 
+            Console.ReadKey();
         }
-        static void Call(int num)
-        {
-            Console.WriteLine(num);
-        }
-    }
-
-    
-
-    public class MyClass
-    {
-        public delegate void Callback(int count);
-        public void Task(Callback count)
-        {
-            for (int i = 0; i < 1000; i++)
-            {
-                // do something
-                count(i);
-            }
-        }
-
-        
     }
 
 
