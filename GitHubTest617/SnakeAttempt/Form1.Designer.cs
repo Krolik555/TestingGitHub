@@ -29,22 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Player1Body = new System.Windows.Forms.PictureBox();
+            this.Player1Head = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.aLabelGameOver = new System.Windows.Forms.Label();
             this.AppleBody = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.Player1Body)).BeginInit();
+            this.aPictureBoxBodySegmant = new System.Windows.Forms.PictureBox();
+            this.aPictureBoxDisplay = new System.Windows.Forms.PictureBox();
+            this.aLabelScoreLabel = new System.Windows.Forms.Label();
+            this.aLabelBodySizeLabel = new System.Windows.Forms.Label();
+            this.aLabelScore = new System.Windows.Forms.Label();
+            this.aLabelBodySize = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Player1Head)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppleBody)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxBodySegmant)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxDisplay)).BeginInit();
             this.SuspendLayout();
             // 
-            // Player1Body
+            // Player1Head
             // 
-            this.Player1Body.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Player1Body.Location = new System.Drawing.Point(283, 271);
-            this.Player1Body.Name = "Player1Body";
-            this.Player1Body.Size = new System.Drawing.Size(18, 18);
-            this.Player1Body.TabIndex = 0;
-            this.Player1Body.TabStop = false;
+            this.Player1Head.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Player1Head.Location = new System.Drawing.Point(283, 271);
+            this.Player1Head.Name = "Player1Head";
+            this.Player1Head.Size = new System.Drawing.Size(18, 18);
+            this.Player1Head.TabIndex = 0;
+            this.Player1Head.TabStop = false;
             // 
             // timer1
             // 
@@ -72,22 +80,94 @@
             this.AppleBody.TabIndex = 2;
             this.AppleBody.TabStop = false;
             // 
+            // aPictureBoxBodySegmant
+            // 
+            this.aPictureBoxBodySegmant.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.aPictureBoxBodySegmant.Location = new System.Drawing.Point(590, 531);
+            this.aPictureBoxBodySegmant.Name = "aPictureBoxBodySegmant";
+            this.aPictureBoxBodySegmant.Size = new System.Drawing.Size(18, 18);
+            this.aPictureBoxBodySegmant.TabIndex = 3;
+            this.aPictureBoxBodySegmant.TabStop = false;
+            // 
+            // aPictureBoxDisplay
+            // 
+            this.aPictureBoxDisplay.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.aPictureBoxDisplay.Location = new System.Drawing.Point(0, 0);
+            this.aPictureBoxDisplay.Name = "aPictureBoxDisplay";
+            this.aPictureBoxDisplay.Size = new System.Drawing.Size(584, 562);
+            this.aPictureBoxDisplay.TabIndex = 4;
+            this.aPictureBoxDisplay.TabStop = false;
+            this.aPictureBoxDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.APictureBoxDisplay_Paint);
+            // 
+            // aLabelScoreLabel
+            // 
+            this.aLabelScoreLabel.AutoSize = true;
+            this.aLabelScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aLabelScoreLabel.Location = new System.Drawing.Point(647, 40);
+            this.aLabelScoreLabel.Name = "aLabelScoreLabel";
+            this.aLabelScoreLabel.Size = new System.Drawing.Size(221, 46);
+            this.aLabelScoreLabel.TabIndex = 5;
+            this.aLabelScoreLabel.Text = "Your Score";
+            // 
+            // aLabelBodySizeLabel
+            // 
+            this.aLabelBodySizeLabel.AutoSize = true;
+            this.aLabelBodySizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aLabelBodySizeLabel.Location = new System.Drawing.Point(611, 161);
+            this.aLabelBodySizeLabel.Name = "aLabelBodySizeLabel";
+            this.aLabelBodySizeLabel.Size = new System.Drawing.Size(296, 46);
+            this.aLabelBodySizeLabel.TabIndex = 7;
+            this.aLabelBodySizeLabel.Text = "Your Body Size";
+            // 
+            // aLabelScore
+            // 
+            this.aLabelScore.AutoSize = true;
+            this.aLabelScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.aLabelScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aLabelScore.Location = new System.Drawing.Point(829, 86);
+            this.aLabelScore.Name = "aLabelScore";
+            this.aLabelScore.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.aLabelScore.Size = new System.Drawing.Size(25, 27);
+            this.aLabelScore.TabIndex = 8;
+            this.aLabelScore.Text = "0";
+            // 
+            // aLabelBodySize
+            // 
+            this.aLabelBodySize.AutoSize = true;
+            this.aLabelBodySize.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.aLabelBodySize.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aLabelBodySize.Location = new System.Drawing.Point(829, 207);
+            this.aLabelBodySize.Name = "aLabelBodySize";
+            this.aLabelBodySize.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.aLabelBodySize.Size = new System.Drawing.Size(25, 27);
+            this.aLabelBodySize.TabIndex = 9;
+            this.aLabelBodySize.Text = "0";
+            // 
             // Display
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(919, 561);
+            this.Controls.Add(this.aLabelBodySize);
+            this.Controls.Add(this.aLabelScore);
+            this.Controls.Add(this.aLabelBodySizeLabel);
+            this.Controls.Add(this.aLabelScoreLabel);
+            this.Controls.Add(this.aPictureBoxBodySegmant);
             this.Controls.Add(this.AppleBody);
             this.Controls.Add(this.aLabelGameOver);
-            this.Controls.Add(this.Player1Body);
+            this.Controls.Add(this.Player1Head);
+            this.Controls.Add(this.aPictureBoxDisplay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Display";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Snake Attempt";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.Player1Body)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Player1Head)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppleBody)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxBodySegmant)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,10 +175,16 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox Player1Body;
+        private System.Windows.Forms.PictureBox Player1Head;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label aLabelGameOver;
         private System.Windows.Forms.PictureBox AppleBody;
+        private System.Windows.Forms.PictureBox aPictureBoxBodySegmant;
+        private System.Windows.Forms.PictureBox aPictureBoxDisplay;
+        private System.Windows.Forms.Label aLabelScoreLabel;
+        private System.Windows.Forms.Label aLabelBodySizeLabel;
+        private System.Windows.Forms.Label aLabelScore;
+        private System.Windows.Forms.Label aLabelBodySize;
     }
 }
 

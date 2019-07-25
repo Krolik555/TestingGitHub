@@ -29,14 +29,15 @@ namespace SnakeAttempt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MapMaxWidth = this.Size.Width - 35; // This value doesn't change once it is set here. Why 35? I don't know. It just works best.
-            MapMaxHeight = this.Size.Height - 56; // This value doesn't change once it is set here. Why 56? I don't know. It just works best.
+            MapMaxWidth = aPictureBoxDisplay.Size.Width - 18; // This value doesn't change once it is set here. Why 35? I don't know. It just works best.
+            MapMaxHeight = aPictureBoxDisplay.Size.Height - 18; // This value doesn't change once it is set here. Why 56? I don't know. It just works best.
 
             // SETUP PLAYER 1
-            P1.PlayerBody = Player1Body;
-            P1.Speed = 3;
+            P1.PlayerHead = Player1Head;
+            P1._BodySegment = aPictureBoxBodySegmant;
             P1.XMax = MapMaxWidth;
             P1.YMax = MapMaxHeight;
+            P1.Start(aLabelGameOver, timer1);
 
             // SETUP APPLE
             apple.AppleBody = AppleBody; // Second AppleBody is on-screen apple.
@@ -72,7 +73,8 @@ namespace SnakeAttempt
             }
             if (e.KeyCode == Keys.P)
             {
-                MoveApple.SpawnApple(apple, MapMaxWidth, MapMaxHeight);
+                MoveApple.SpawnApple(apple, MapMaxWidth, MapMaxHeight);     
+                
             }
         }
 
@@ -84,17 +86,28 @@ namespace SnakeAttempt
                 P1.Die(aLabelGameOver);
                 timer1.Stop();
             }
-            if (HitDetect.DetectAppleHit(P1, apple))
+            if (HitDetect.DetectFoodHit(P1, apple))
             {
-                P1.Eat(apple);
+                PictureBox Body = new PictureBox();
+                Body = aPictureBoxBodySegmant;
+                P1.Eat(apple, Body);
                 MoveApple.SpawnApple(apple, MapMaxWidth, MapMaxHeight);
             }
             MovePlayer.Now(P1); // Simply, move the player.
+
+            aLabelScore.Text = P1.Score.ToString();
+            aLabelBodySize.Text = P1.PlayerBody.Count.ToString();
+
         }
 
         public void RestartPlayer (Player player)
         {
             player.Start(aLabelGameOver, timer1);
+        }
+
+        private void APictureBoxDisplay_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

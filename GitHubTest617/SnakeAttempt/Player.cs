@@ -12,21 +12,23 @@ namespace SnakeAttempt
 
         public Player()
         {
-            X = 283;
             XDefault = 283;
-            Y = 271;
             YDefault = 271;
-
-            Speed = 1;
         }
-        // Other stuff
-        public PictureBox PlayerBody = new PictureBox();
+        // Player's Head
+        public PictureBox PlayerHead = new PictureBox();
+        // Players Body
+        public PictureBox _BodySegment = new PictureBox();
+        public List<PictureBox> PlayerBody = new List<PictureBox>(); 
+
+        // Direction the Player is currently going
         public int CurrentDirection { get; set; }
 
-        // Player Location
+        // Current Player Location
         public int X { get; set; }
         public int Y { get; set; }
 
+        // Default Player Location
         public int XDefault { get; }
         public int YDefault { get; }
 
@@ -38,7 +40,7 @@ namespace SnakeAttempt
         public int XMax { get; set; }
         public int YMax { get; set; }
 
-        // STATS
+        // Player STATS
         public bool Alive { get; set; }
         public int Length { get; set; }
         public int Speed { get; set; }
@@ -52,7 +54,7 @@ namespace SnakeAttempt
             // RESET ALL VALUES
             X = XDefault;
             Y = YDefault;
-            PlayerBody.Location = new System.Drawing.Point(X, Y); // reset body location
+            PlayerHead.Location = new System.Drawing.Point(X, Y); // reset body location
             GameOverLabel.Visible = false;
             Alive = true;
             Length = 1;
@@ -65,10 +67,10 @@ namespace SnakeAttempt
             
         }
 
-        public void Eat(Apple Apple) // Grow Body
+        public void Eat(Apple AppleAte, PictureBox SegmentAdded) // Grow Body
         {
-            Score += Apple.Value;
-            Length++;
+            Score += AppleAte.Value;
+            PlayerBody.Add(SegmentAdded);
         }
 
         public void Die(Label GameOverLabel)
@@ -76,5 +78,6 @@ namespace SnakeAttempt
             GameOverLabel.Visible = true;
             Alive = false;
         }
+
     }
 }
