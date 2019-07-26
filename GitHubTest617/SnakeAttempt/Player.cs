@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SnakeAttempt
 {
@@ -14,11 +15,13 @@ namespace SnakeAttempt
         {
             XDefault = 283;
             YDefault = 271;
+            //XMax = Settings.MapMaxWidth;
+            //YMax = Settings.MapMaxHeight;
         }
         // Player's Head
-        public PictureBox PlayerHead = new PictureBox();
+        //public PictureBox PlayerHead = new PictureBox();
         // Players Body
-        public PictureBox _BodySegment = new PictureBox();
+        public PictureBox Segment_PictureBox = new PictureBox();
         public List<PictureBox> PlayerBody = new List<PictureBox>(); 
 
         // Direction the Player is currently going
@@ -32,13 +35,13 @@ namespace SnakeAttempt
         public int XDefault { get; }
         public int YDefault { get; }
 
-        // Min Player Location
-        public int XMin { get; set; }
-        public int YMin { get; set; }
+        //// Min Player Location
+        //public int XMin { get; set; }
+        //public int YMin { get; set; }
 
-        // Max Player Location
-        public int XMax { get; set; }
-        public int YMax { get; set; }
+        //// Max Player Location
+        //public int XMax { get; set; }
+        //public int YMax { get; set; }
 
         // Player STATS
         public bool Alive { get; set; }
@@ -51,15 +54,16 @@ namespace SnakeAttempt
 
         public void Start(Label GameOverLabel, Timer timer) // Reset to defaults
         {
+            PlayerBody.Add(Segment_PictureBox);
             // RESET ALL VALUES
             X = XDefault;
             Y = YDefault;
-            PlayerHead.Location = new System.Drawing.Point(X, Y); // reset body location
+            PlayerBody[0].Location = new System.Drawing.Point(X, Y); // reset body location
             GameOverLabel.Visible = false;
             Alive = true;
             Length = 1;
-            Speed = 3;
-            CurrentDirection = 0;
+            Speed = Settings.Speed;
+            //CurrentDirection = 0;
 
             // Start Game
             timer.Start();
@@ -69,6 +73,7 @@ namespace SnakeAttempt
 
         public void Eat(Apple AppleAte, PictureBox SegmentAdded) // Grow Body
         {
+            SegmentAdded.Size = new Size(Settings.PlayerWidth, Settings.PlayerHeight);
             Score += AppleAte.Value;
             PlayerBody.Add(SegmentAdded);
         }

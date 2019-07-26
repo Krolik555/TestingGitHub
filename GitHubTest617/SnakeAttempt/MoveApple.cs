@@ -10,13 +10,13 @@ namespace SnakeAttempt
     class MoveApple
     {
         static Random RandomNumber = new Random();
-        public static void SpawnApple(Apple apple, int MaxWidth, int MaxHeight)
+        public static void SpawnApple(Apple apple)
         {
-            apple.X = RandomNumber.Next(0, MaxWidth);
-            apple.Y = RandomNumber.Next(0, MaxHeight);
+            apple.X = RandomNumber.Next(0, Settings.MapMaxWidth);
+            apple.Y = RandomNumber.Next(0, Settings.MapMaxHeight);
 
             apple.AppleBody.Location = new Point(apple.X, apple.Y);
         }
-        
+       
     }
 }
