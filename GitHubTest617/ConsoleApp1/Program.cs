@@ -9,20 +9,19 @@ namespace ConsoleApp1
 
     class Program
     {
+
+
         static void Main(string[] args)
         {
 
-            int x = 5;
-            int y = ++x;
-            int z = x++;
-            x += y;
-            Console.Write(x);
-
-            Console.Write(" ");
-            int i = 1;
-            int f = 1;
-            Console.Write(i++);
-            Console.Write(++f);
+            var a = 2;
+            var b = "1";
+            var c = 0;
+            var d = int.Parse(b);
+            var e = int.Parse(b + c);
+            var ee = e / 21;
+            var f = int.Parse(a + b + c) / 21;
+            Console.Write(f);
 
             Console.ReadKey();
         }

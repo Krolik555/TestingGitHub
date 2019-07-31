@@ -13,13 +13,12 @@ namespace SnakeAttempt
     public partial class Display : Form
     {
         // instantiate Objects
-        Player P1 = new Player();
+        //Player P1 = new Player();
         Apple apple = new Apple();
 
+        List<Circle> Snake = new List<Circle>();
+        Circle Food = new Circle();
 
-        // instantiate global values
-        //public int MapMaxWidth;
-        //public int MapMaxHeight;
 
         Random RandomNumber = new Random();
 
@@ -29,22 +28,19 @@ namespace SnakeAttempt
             new GlobalObjects(aLabelScoreLabel);
             new GlobalObjects(aPictureBoxDisplay);
             new Settings();
-            
 
+
+
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //MapMaxWidth = aPictureBoxDisplay.Size.Width - 18; // This value doesn't change once it is set here. Why 35? I don't know. It just works best.
-            //MapMaxHeight = aPictureBoxDisplay.Size.Height - 18; // This value doesn't change once it is set here. Why 56? I don't know. It just works best.
 
             // SETUP PLAYER 1
-            //P1.PlayerHead = Player1Head;
-            P1.Segment_PictureBox = aPictureBoxBodySegmant;
-            P1.Segment_PictureBox.Size = new Size(Settings.PlayerWidth, Settings.PlayerHeight);
-            //P1.XMax = MapMaxWidth;
-            //P1.YMax = MapMaxHeight;
-            P1.Start(aLabelGameOver, timer1);
+            //P1.Segment_PictureBox = aPictureBoxBodySegmant;
+            //P1.Segment_PictureBox.Size = new Size(Settings.PlayerWidth, Settings.PlayerHeight);
+            //P1.Start(aLabelGameOver, timer1);
 
             // SETUP APPLE
             apple.AppleBody = AppleBody; // Second AppleBody is on-screen apple.
@@ -52,36 +48,50 @@ namespace SnakeAttempt
             apple.Value = 10;
             MoveApple.SpawnApple(apple);
 
+
+
+
             // Start Game
             timer1.Start();
+            StartGame();
         }
         
+        public void StartGame()
+        {
+            new Settings();
+
+            Snake.Clear();
+            Circle head = new Circle();
+            head.X = Settings.XDefault;
+            head.Y = Settings.YDefault;
+            Snake.Add(head);
+            Settings.GameOver = false;
+            aLabelGameOver.Visible = false;
+            timer1.Start();
+            
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             // Determine what key is pressed and assign that direction to player 1.
             if (e.KeyCode == Keys.Up)
             {
                 Settings.direction = Direction.Up;
-                //P1.CurrentDirection = (int)PlayerControls.Move.Up;
             }
             if (e.KeyCode == Keys.Down)
             {
                 Settings.direction = Direction.Down;
-                //P1.CurrentDirection = (int)PlayerControls.Move.Down;
             }
             if (e.KeyCode == Keys.Left)
             {
                 Settings.direction = Direction.Left;
-                //P1.CurrentDirection = (int)PlayerControls.Move.Left;
             }
             if (e.KeyCode == Keys.Right)
             {
                 Settings.direction = Direction.Right;
-                //P1.CurrentDirection = (int)PlayerControls.Move.Right;
             }
-            if (!P1.Alive && e.KeyCode == Keys.Enter)
+            if (Settings.GameOver && e.KeyCode == Keys.Enter)
             {
-                RestartPlayer(P1);
+                StartGame();
             }
             if (e.KeyCode == Keys.P)
             {
@@ -92,33 +102,74 @@ namespace SnakeAttempt
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (HitDetect.DetectWallHit(P1))
+            aPictureBoxDisplay.Invalidate();
+            Rectangle Head = new Rectangle(Snake[0].X, Snake[0].Y,
+                                  Settings.PlayerWidth, Settings.PlayerHeight);
+
+            // Detect if player hits wall
+            if (HitDetect.DetectWallHit(Head, aPictureBoxDisplay))
             {
-                P1.Die(aLabelGameOver);
+                Die(aLabelGameOver);
                 timer1.Stop();
             }
-            if (HitDetect.DetectFoodHit(P1, apple))
+            // Detect if player hits food
+            if (HitDetect.DetectFoodHit(Head, apple))
             {
-                PictureBox Body = new PictureBox();
-                Body = Player1Head;
-                P1.Eat(apple, Body);
+                Eat(apple);
                 MoveApple.SpawnApple(apple);
             }
-            MovePlayer.Now(P1); // Simply, move the player.
+            // Move player every tick
+            MovePlayer.Now(Snake);
 
-            aLabelScore.Text = P1.Score.ToString();
-            aLabelBodySize.Text = P1.PlayerBody.Count.ToString();
+            // Update score and body size labels
+            aLabelScore.Text = Settings.Score.ToString();
+            aLabelBodySize.Text = Settings.BodySize.ToString();
 
         }
 
-        public void RestartPlayer (Player player)
+
+
+        public void Eat(Apple AppleAte) // Grow Body
         {
-            player.Start(aLabelGameOver, timer1);
+            Circle segment = new Circle();
+            segment.X = Snake[Snake.Count - 1].X;
+            segment.Y = Snake[Snake.Count - 1].Y;
+            Settings.Score += AppleAte.Value;
+            Settings.BodySize += 1;
+            Snake.Add(segment);
+        }
+
+        public void Die(Label GameOverLabel)
+        {
+            GameOverLabel.Visible = true;
+            Settings.GameOver = true;
         }
 
         private void APictureBoxDisplay_Paint(object sender, PaintEventArgs e)
         {
-            
+            Graphics canvas = e.Graphics;
+
+            Brush snakeColor;
+            for (int i = 0; i <= Snake.Count - 1; i++)
+            {
+                if (i == 0) 
+                {
+                    snakeColor = Brushes.White; // Draw Head
+                }
+                else 
+                {
+                    snakeColor = Brushes.Gold; // Draw Body
+                }
+
+                // Draw Snake
+                canvas.FillRectangle(snakeColor,
+                    new Rectangle(Snake[i].X,
+                                  Snake[i].Y,
+                                  Settings.PlayerWidth, Settings.PlayerHeight));
+
+
+                
+            }
         }
     }
 }

@@ -29,34 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Player1Head = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.aLabelGameOver = new System.Windows.Forms.Label();
             this.AppleBody = new System.Windows.Forms.PictureBox();
-            this.aPictureBoxBodySegmant = new System.Windows.Forms.PictureBox();
             this.aPictureBoxDisplay = new System.Windows.Forms.PictureBox();
             this.aLabelScoreLabel = new System.Windows.Forms.Label();
             this.aLabelBodySizeLabel = new System.Windows.Forms.Label();
             this.aLabelScore = new System.Windows.Forms.Label();
             this.aLabelBodySize = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Player1Head)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppleBody)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxBodySegmant)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxDisplay)).BeginInit();
             this.SuspendLayout();
             // 
-            // Player1Head
-            // 
-            this.Player1Head.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Player1Head.Location = new System.Drawing.Point(283, 271);
-            this.Player1Head.Name = "Player1Head";
-            this.Player1Head.Size = new System.Drawing.Size(18, 18);
-            this.Player1Head.TabIndex = 0;
-            this.Player1Head.TabStop = false;
-            // 
             // timer1
             // 
-            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // aLabelGameOver
@@ -79,15 +65,6 @@
             this.AppleBody.Size = new System.Drawing.Size(18, 18);
             this.AppleBody.TabIndex = 2;
             this.AppleBody.TabStop = false;
-            // 
-            // aPictureBoxBodySegmant
-            // 
-            this.aPictureBoxBodySegmant.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.aPictureBoxBodySegmant.Location = new System.Drawing.Point(590, 531);
-            this.aPictureBoxBodySegmant.Name = "aPictureBoxBodySegmant";
-            this.aPictureBoxBodySegmant.Size = new System.Drawing.Size(18, 18);
-            this.aPictureBoxBodySegmant.TabIndex = 3;
-            this.aPictureBoxBodySegmant.TabStop = false;
             // 
             // aPictureBoxDisplay
             // 
@@ -153,10 +130,8 @@
             this.Controls.Add(this.aLabelScore);
             this.Controls.Add(this.aLabelBodySizeLabel);
             this.Controls.Add(this.aLabelScoreLabel);
-            this.Controls.Add(this.aPictureBoxBodySegmant);
             this.Controls.Add(this.AppleBody);
             this.Controls.Add(this.aLabelGameOver);
-            this.Controls.Add(this.Player1Head);
             this.Controls.Add(this.aPictureBoxDisplay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Display";
@@ -164,9 +139,7 @@
             this.Text = "Snake Attempt";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.Player1Head)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppleBody)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxBodySegmant)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aPictureBoxDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -174,12 +147,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox Player1Head;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label aLabelGameOver;
         private System.Windows.Forms.PictureBox AppleBody;
-        private System.Windows.Forms.PictureBox aPictureBoxBodySegmant;
         private System.Windows.Forms.PictureBox aPictureBoxDisplay;
         private System.Windows.Forms.Label aLabelScoreLabel;
         private System.Windows.Forms.Label aLabelBodySizeLabel;
